@@ -1,11 +1,7 @@
 package com.example.flixster.models;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class Movie {
     String title;
@@ -24,7 +20,7 @@ public class Movie {
     }
 
     public String getPosterIMG() {
-        return "https://image.tmdb.org/t/p/w342/" + posterIMG;
+        return "https://image.tmdb.org/t/p/w342" + posterIMG;
     }
 
     public String getSummary() {

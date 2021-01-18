@@ -31,14 +31,17 @@ public class MainActivity extends AppCompatActivity {
 
         AsyncHttpClient client = new AsyncHttpClient();
         client.get(MOVIE_DB_URL, new JsonHttpResponseHandler() {
+
             @Override
             public void onSuccess(int i, Headers headers, JSON json) {
+
                 Log.d(TAG, "onSuccess");
                 JSONObject jsonObject = json.jsonObject;
 
                 try {
                     JSONArray resultsArray = jsonObject.getJSONArray("results");
                     Log.i(TAG, "Results: " + resultsArray.toString());
+
                     movies = fromJsonArray(resultsArray);
                     Log.i(TAG, "Movies: " + movies.size());
                 }
