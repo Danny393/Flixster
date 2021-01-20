@@ -1,12 +1,15 @@
 package com.example.flixster;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.util.Log;
 
 import com.codepath.asynchttpclient.AsyncHttpClient;
 import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler;
+import com.example.flixster.adapters.MovieAdapter;
 import com.example.flixster.models.Movie;
 
 import org.json.JSONArray;
@@ -29,6 +32,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        movies = new ArrayList<>();
+        RecyclerView rvMovies = findViewById(R.id.rvMovies);
+        MovieAdapter adapter = new MovieAdapter(this, movies);
+        rvMovies.setAdapter(adapter);
+        rvMovies.setLayoutManager(new LinearLayoutManager(this));
+
         AsyncHttpClient client = new AsyncHttpClient();
         client.get(MOVIE_DB_URL, new JsonHttpResponseHandler() {
 
@@ -42,7 +51,9 @@ public class MainActivity extends AppCompatActivity {
                     JSONArray resultsArray = jsonObject.getJSONArray("results");
                     Log.i(TAG, "Results: " + resultsArray.toString());
 
-                    movies = fromJsonArray(resultsArray);
+                    movies.addAll(fromJsonArray(resultsArray));
+                    adapter.notifyDataSetChanged();
+
                     Log.i(TAG, "Movies: " + movies.size());
                 }
                 catch (JSONException e) {
