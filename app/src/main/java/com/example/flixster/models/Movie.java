@@ -11,6 +11,7 @@ public class Movie {
     String posterIMG;
     String summary;
     String backdropIMG;
+    int movieID;
     double rating;
 
     //this is for parceler library
@@ -22,6 +23,7 @@ public class Movie {
         posterIMG = movieObject.getString("poster_path");
         summary = movieObject.getString("overview");
         backdropIMG = movieObject.getString("backdrop_path");
+        movieID = movieObject.getInt("id");
         rating = movieObject.getDouble("vote_average") / 2.0;
     }
 
@@ -38,6 +40,8 @@ public class Movie {
     }
 
     public String getBackdropIMG() { return "https://image.tmdb.org/t/p/w342" + backdropIMG; }
+
+    public int getMovieID() { return movieID; }
 
     public double getRating() { return rating; }
 

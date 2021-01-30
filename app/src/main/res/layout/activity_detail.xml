@@ -7,6 +7,12 @@
     tools:context=".DetailActivity"
     android:orientation="vertical">
 
+    <com.google.android.youtube.player.YouTubePlayerView
+        android:id="@+id/ytPlayer"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+    />
+
     <TextView
         android:id="@+id/tvDeTitle"
         android:layout_width="match_parent"
