@@ -2,12 +2,19 @@ package com.example.flixster.models;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.parceler.Parcel;
 
+@Parcel
 public class Movie {
+
     String title;
     String posterIMG;
     String summary;
     String backdropIMG;
+    double rating;
+
+    //this is for parceler library
+    public Movie() {}
 
     public Movie(JSONObject movieObject) throws JSONException
     {
@@ -15,6 +22,7 @@ public class Movie {
         posterIMG = movieObject.getString("poster_path");
         summary = movieObject.getString("overview");
         backdropIMG = movieObject.getString("backdrop_path");
+        rating = movieObject.getDouble("vote_average") / 2.0;
     }
 
     public String getTitle() {
@@ -30,16 +38,7 @@ public class Movie {
     }
 
     public String getBackdropIMG() { return "https://image.tmdb.org/t/p/w342" + backdropIMG; }
-    //this felt out of place here, moved to main activity for now unless problems arise
-    /*public static List<Movie> fromJsonArray(JSONArray movieArray) throws JSONException
-    {
-        List<Movie> movies = new ArrayList<>();
 
-        for(int i = 0; i < movieArray.length(); i++)
-        {
-            movies.add(new Movie(movieArray.getJSONObject(i)));
-        }
+    public double getRating() { return rating; }
 
-        return movies;
-    }*/
 }
